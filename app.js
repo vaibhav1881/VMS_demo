@@ -113,7 +113,6 @@ app.get("/stat", (req, res) => {
   });
 });
 
-
 var pri;
 //Choose hospital during patient registration-----------------------------------------
 app.get("/choose_hosp/:pin/:pid", (req, res) => {
@@ -313,8 +312,10 @@ app.get("/bothdose", authController.isLoggedIn, (req, res) => {
     let sql1 = "call filter_patients(2, ?);";
     con.start.query(sql1, req.user.H_id, function (err, result) {
       if (err) {
-        if (err.code === 'ER_WRONG_VALUE') {
-          console.error("Error: Incorrect DATE value. Handling the error gracefully.");
+        if (err.code === "ER_WRONG_VALUE") {
+          console.error(
+            "Error: Incorrect DATE value. Handling the error gracefully."
+          );
           res.render("hosp_logindata", {
             user: req.user,
             patient_details: [],
@@ -339,7 +340,6 @@ app.get("/bothdose", authController.isLoggedIn, (req, res) => {
     });
   }
 });
-
 
 /************************POST REQUESTS*******************************/
 /********************************************************************/
@@ -681,6 +681,6 @@ app.post("/hosp_logindata", authController.isLoggedIn, (req, res) => {
 });
 
 /*******************************************************/
-app.listen(3000, function () {
-  console.log("Running on http://localhost:3000");
+app.listen(8001, function () {
+  console.log("Running on http://localhost:8001");
 });
